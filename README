@@ -1,0 +1,109 @@
+                README File for SOSpin Library Distribution
+---------------------------------------------------------------------------------
+=================================================================================
+=================================================================================
+Overview
+=================================================================================
+SOSpin (one reads it as a single word “sospin”), with the purpose to calculate 
+the decomposition of the Yukawa interactions invariants on SO(2N) groups in terms
+of the SU(N) subgroup. The program also includes specific functions to address 
+the SO(10).
+
+
+=================================================================================
+=================================================================================
+Download
+=================================================================================
+The latest release of SOSpin is available from: 
+http://sospin.hepforge.org/
+the file is like sospin-x.x.x.tar.gz
+
+
+=================================================================================
+=================================================================================
+Installation
+=================================================================================
+Installing the library involves running 
+1. a) ./configure --prefix=library_installation_path --with-form=FORM_path
+   b) ./configure --prefix=library_installation_path
+  the user can omit the FORM path declaration and set it after using 
+  export PATH_TO_FORM=FORM_path
+  or put the binary FORM file in the folder where the user has its project.
+  also, you can skip the --prefix command, however the installation will be in 
+  system default directories
+2. make
+3. make install (if you don't use --prefix command you need to run this with 
+                 root privileges in UNIX)
+4. make doxygen-doc (optional, generate SOSpin library documentation)
+
+=================================================================================
+=================================================================================
+FORM Installation:
+=================================================================================
+Symbolic Manipulation System FORM to final expression simplifications.
+The FORM binary package file can be downloaded in http://www.nikhef.nl/~form/, 
+after accepting the license agreement.
+
+After accepting the license agreement, click in binaries link and then click in 
+the executable for your system:
+- Linux 32-bits
+- Linux 64-bits
+- 32-bits version for the Cygwin UNIX emulator under Windows
+- Apple
+
+There are two binaries for UNIX and Apple computers, one for sequential (form) 
+and other for multi-threaded  (tform).
+You can choose anyone.
+IMPORTANT: If you choose the multi-threaded version please rename the binary 
+executable name to "form".
+
+In UNIX you have to turn the execution flag on form,
+chmod +x form
+
+
+=================================================================================
+=================================================================================
+Uninstallation
+=================================================================================
+To remove the installed library do: make uninstall
+If you have installed the library in the system you also need to run the command 
+with root privileges.
+
+=================================================================================
+=================================================================================
+Using the library and Compiling
+=================================================================================
+Using the Library:
+There are several code examples in the examples folder which come with the 
+SOSpin library.
+
+
+Linking code with the library in Linux:
+g++ −O3 −I/library_installation_path/include −L/library_installation_path/lib \
+example.cpp −o example −lsospin
+
+Note: if you didn't use the --prefix option, the compilation will be more easy,
+g++ -O3 example.cpp -o example -lsospin
+
+and in the code use
+#include <sospin/son.h>
+and if using SO(10) specific functions:
+#include <sospin/tools/so10.h>
+
+=================================================================================
+=================================================================================
+Using the specific functions or symbols within the constant part of Braket
+=================================================================================
+pure imaginary: i_
+delta function: d_(...,...)
+levi-civita tensor: e_(...,...,...)
+square root: sqrt(...)
+
+=================================================================================
+=================================================================================
+Authors
+=================================================================================
+Nuno Cardoso (IST, Universidade de Lisboa, Portugal), <nuno.cardoso[AT]tecnico.ulisboa.pt>
+David Emmanuel-Costa (IST, Universidade de Lisboa, Portugal), <david.costa[AT]tecnico.ulisboa.pt>
+Nuno Gonçalves (ISR, University of Coimbra, Portugal), <nunogon[AT]deec.uc.pt>
+Catarina Simões (IFPA, Université de Liège, Belgium), <csimoes[AT]ulg.ac.be>
