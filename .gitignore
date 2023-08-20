@@ -1,3 +1,10 @@
+# IDE
+*.iml
+.idea/
+.project
+.DS_Store
+build/
+
 # Prerequisites
 *.d
 
