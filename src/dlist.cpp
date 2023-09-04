@@ -38,11 +38,11 @@
 
 /*!
   \file 
-  \brief Defintions for all general (initialisation etc.) routines of class DList.
+  \brief Definitions for all general (initialisation etc.) routines of class DList.
 */
 
 
-#include "dlist.h"
+#include <sospin/dlist.h>
 #include "son.h"
 #include "index.h"
 

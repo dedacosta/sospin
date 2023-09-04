@@ -4,6 +4,7 @@
 .project
 .DS_Store
 build/
+.settings
 
 # Prerequisites
 *.d
