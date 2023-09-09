@@ -1,7 +1,7 @@
 {
   "name": "sospin",
   "description": "C++ Library to decompose SO(2N) Yukawa interaction invariant in terms of the SU(N).",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "license": "GPL-3",
   "keywords": [
     "special othogonal groups",
