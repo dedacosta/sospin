@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------------
 // SOSpin Library
-// Copyright (C) 2015 SOSpin Project
+// Copyright (C) 2015,2023 SOSpin Project
 //
 //   Authors:
 //
@@ -38,7 +38,7 @@
 //
 
 /*!
-  \file 
+  \file
   \brief Defintions for all general (initialisation etc.) routines of class DList.
 */
 
@@ -71,7 +71,7 @@ namespace sospin {
         bt = 1, ///< b^\\dagger element
         delta = 2, ///< \\delta element
         ct = 3 ///< constant element
-    };
+        };
 
     /**
      * \struct elemtype
@@ -107,49 +107,57 @@ namespace sospin {
         //Total - 32 bits
         unsigned int dataField;
 
+        elemType() {}
+
+        elemType(const elemType& elem) {
+            setType(elem.getType());
+            setIdx1(elem.getIdx1());
+            setIdx2(elem.getIdx2());
+            }
+
         /*! \brief Returns the type of the element. Ex.: $b$ - type=0; $b^{\dagger}$ - type=1; $\delta$ - type=2; constant - type=3.*/
-        unsigned int getType() {
+        unsigned int getType() const {
             unsigned int type_out;
             type_out = dataField >> 29;
             return type_out;
-        }
+            }
 
         /*! \brief Returns the sign of the element (not used in current version).*/
-        bool getSign() {
+        bool getSign() const {
             unsigned int bool_out;
             bool_out = dataField & 0x10000000;
             bool_out = bool_out >> 28;
             return bool_out;
-        }
+            }
 
         /*! \brief Returns the first data field of the element (id.x).*/
-        unsigned int getIdx1() {
+        unsigned int getIdx1() const {
             unsigned int idx1_out;
             idx1_out = dataField & 0x0FFC0000;
             idx1_out = idx1_out >> 18;
             return idx1_out;
-        }
+            }
 
         /*! \brief Returns the second data field of the element (id.y).*/
-        unsigned int getIdx2() {
+        unsigned int getIdx2() const {
             unsigned int idx2_out;
             idx2_out = dataField & 0x0003FF00;
             idx2_out = idx2_out >> 8;
             return idx2_out;
-        }
+            }
 
         /*! \brief Creates and return an element of type "type" and one data field "data". Second data field is set to zero.*/
         static elemType make_elem(int type, int data) {
             if (type == 2) {
                 cout << "Cannot make a delta elemType with only one index" << endl;
                 exit(0);
-            } // returns error if data.type = 2 (delta)
+                } // returns error if data.type = 2 (delta)
             elemType elem;
             elem.setType(type);
             elem.setIdx1(data);
             elem.setIdx2(0);
             return elem;
-        }
+            }
 
         /*! \brief Creates and return an element of type "type" and data fields "data1" and "data2".*/
         static elemType make_elem(int type, int data1, int data2) {
@@ -158,7 +166,7 @@ namespace sospin {
             elem.setIdx1(data1);
             elem.setIdx2(data2);
             return elem;
-        }
+            }
 
         /*! \brief Creates and return $\delta$ element using first data field of elements "a" and "b".*/
         static elemType make_delta(elemType data1, elemType data2) {
@@ -167,7 +175,7 @@ namespace sospin {
             elem.setIdx1(data1.getIdx1());
             elem.setIdx2(data2.getIdx1());
             return elem;
-        }
+            }
 
         /*! \brief Sets the type of the element.*/
         void setType(unsigned int typ) {
@@ -187,7 +195,7 @@ namespace sospin {
             // For all other types (not used)
             if (typ > 3) dataField = dataField | 0x80000000;
 
-        }
+            }
 
         /*! \brief Sets sign field of the element (not used in current version).*/
         void setSign(bool sign) {
@@ -197,7 +205,7 @@ namespace sospin {
             //Set sign (only if sign is true)
             if (sign == 1) dataField = dataField | 0x10000000;
 
-        }
+            }
 
         /*! \brief Sets first data field of the element (idx1).*/
         void setIdx1(unsigned int idx) {
@@ -214,7 +222,7 @@ namespace sospin {
 
             //Set data1 field
             dataField = dataField | in;
-        }
+            }
 
         /*! \brief Sets second data field of the element (idx2).*/
         void setIdx2(unsigned int idx) {
@@ -231,18 +239,18 @@ namespace sospin {
 
             //Set data2 field
             dataField = dataField | in;
-        }
+            }
 
         /*! \brief Makes a copy of an element.*/
-        elemType& operator=(const elemType &elem) {
-            elemType aux=elem;
-            setType(aux.getType());
-            setIdx1(aux.getIdx1());
-            setIdx2(aux.getIdx2());
+        elemType& operator=(const elemType& elem) {
+            // elemType aux=elem;
+            setType(elem.getType());
+            setIdx1(elem.getIdx1());
+            setIdx2(elem.getIdx2());
             return *this;
-        }
+            }
 
-    };
+        };
 
     /*!
       \struct noList
@@ -252,10 +260,10 @@ namespace sospin {
         /*! \brief Store symbol type.*/
         elemType data;
         /*! \brief Pointer to the previous (@a prv) node.*/
-        noList *prv;
+        noList* prv;
         /*! \brief Pointer to the next (@a nxt) node.*/
-        noList *nxt;
-    };
+        noList* nxt;
+        };
 
     /*!
       \class DList Class
@@ -263,11 +271,11 @@ namespace sospin {
      */
     class DList {
         /*! \brief Pointer to the first node.*/
-        noList *begin;
+        noList* begin;
         /*! \brief Pointer to the last node.*/
-        noList *end;
+        noList* end;
         /*! \brief Pointer to the actual node.*/
-        noList *actual;
+        noList* actual;
         /*! \brief Store the sign of the monomial.*/
         int sign;
 
@@ -285,7 +293,7 @@ namespace sospin {
         DList(int tp, int i, int j);
 
         /*! \brief Constructor by copy.*/
-        DList(const DList &L);
+        DList(const DList& L);
 
         /*! \brief Destructor.*/
         ~DList(void);
@@ -299,7 +307,7 @@ namespace sospin {
         /*! \brief Changes the sign of DList.*/
         void negate() {
             sign *= -1;
-        }
+            }
 
 
         /*! \brief Adds one node at the end of DList (scans the list). Updates actual pointer to be the last node.*/
@@ -315,22 +323,22 @@ namespace sospin {
         /*! \brief Sets data (elemtype) of the node being pointed by actual pointer.*/
         void set(elemType i) {
             actual->data = i;
-        }
+            }
 
         /*! \brief Changes actual pointer to point at the first element of DList (beg pointer).*/
         void set_begin() {
             actual = begin;
-        }
+            }
 
         /*! \brief Changes actual pointer to point at the last element of DList (end pointer).*/
         void set_end() {
             actual = end;
-        }
+            }
 
         /*! \brief Sets the sign of DList.*/
         void set_sign(int ii) {
             sign = ii;
-        }
+            }
 
 
         /*! \brief Joins a DList to the end of the current DList (this). Updates "actual" pointer to be the end of the final DList.*/
@@ -340,13 +348,13 @@ namespace sospin {
         void loop_right() {
             if (actual == 0 || actual->nxt == 0) actual = begin;
             else actual = actual->nxt;
-        }
+            }
 
         /*! \brief Shifts actual pointer to previous node. If actual node is the beg node, shift to end node.*/
         void loop_left() {
-            actual = actual -> prv;
+            actual = actual->prv;
             if (actual == 0) actual = end;
-        }
+            }
 
         /*! \brief Creates and returns a new DList by copying nodes in DList ordered by type. The nodes that first appear in the new ordered DList are $\delta$'s (type=2) and then all other elements: $b$ (type=0) and $b^\dagger$ (type=1) unordered. Constant elements are removed.*/
         DList rearrange();
@@ -361,13 +369,13 @@ namespace sospin {
         void shift_right() {
             if (actual == 0 || actual->nxt == 0) actual = end;
             else actual = actual->nxt;
-        }
+            }
 
         /*! \brief Shifts actual pointer to previous node. If actual node if first node (begin), stops.*/
         void shift_left() {
-            actual = actual -> prv;
+            actual = actual->prv;
             if (actual == 0) actual = begin;
-        }
+            }
 
         /*! \brief Swaps the actual node with the next node of DList.*/
         void swap_next();
@@ -378,24 +386,24 @@ namespace sospin {
         /*! \brief Returns elemtype of the node being pointed by actual (current element).*/
         elemType get() {
             return actual->data;
-        }
+            }
 
         /*! \brief Returns the sign of DList.*/
         int getSign() {
             return sign;
-        }
+            }
 
         /*! \brief Creates and returns an integer vector sequence container with the ids (data fields) of $b$'s and $b^\dagger$'s elements.*/
         vector<int> getIds();
 
         /*! \brief Updates integer vector sequence containers "id0" and "id1" with ids (data fields) of $b$'s and $b^\dagger$'s elements, respectively. "sign" is updated with the sign of DList. "BandBdagger" is a boolean which is true if DList contains at least one $b$ or $b^\dagger$, and false otherwise.*/
-        void getBandBdaggerIds(bool &BandBdagger, vector<string> &id0, vector<string> &id1, int &sign);
+        void getBandBdaggerIds(bool& BandBdagger, vector<string>& id0, vector<string>& id1, int& sign);
 
         /*! \brief Updates integer vector sequence containers "id0" and "id1" with first and second ids (data fields) of $\delta$ elements, respectively. "sign" is updated with the sign of DList. "AllDeltas" is a boolean which is true if all elements in DList are of $\delta$ type, and false otherwise.*/
-        void getDeltaIds(bool &AllDeltas, vector<string> &id0, vector<string> &id1, int &sign);
+        void getDeltaIds(bool& AllDeltas, vector<string>& id0, vector<string>& id1, int& sign);
 
         /*! \brief Updates integer vector sequence containers "id0" and "id1" with ids (data fields) of $b$'s and $b^\dagger$'s elements, respectively, and "id2" and "id3" integer vector sequence containers with first and second data fields of $\delta$'s elements, respectively. "sign" is updated with the sign of DList.*/
-        void getBandBdaggerAndDeltasIds(vector<string> &id0, vector<string> &id1, vector<string> &id2, vector<string> &id3, int &sign);
+        void getBandBdaggerAndDeltasIds(vector<string>& id0, vector<string>& id1, vector<string>& id2, vector<string>& id3, int& sign);
 
         /*! \brief Returns the number of elements of type $\delta$ (type=2).*/
         int numDeltas();
@@ -434,14 +442,14 @@ namespace sospin {
         /*! \brief Returns true if actual pointer is pointing to the last (end) node of DList.*/
         bool isActualLast() {
             return (actual == end) ? true : false;
-        }
+            }
 
         /*! \brief Returns true if DList has no nodes.*/
         bool isEmpty() {
             bool epty = true;
             if (begin != 0) epty = false;
             return epty;
-        }
+            }
 
         /*! \brief Returns true if there is no elements of type $\delta$ in DList.*/
         bool hasNoDeltas();
@@ -465,7 +473,7 @@ namespace sospin {
         //Friends
 
         /*! \brief Creates and returns a pointer to a new copy of a DList.*/
-        friend DList* copy(DList *L);
+        friend DList* copy(DList* L);
 
         /*! \brief Applies the following identity:
           \f{eqnarray*}{
@@ -476,7 +484,7 @@ namespace sospin {
           @para[in] braketmode, if true if last element in DList is a b, then the L is cleared
           @return returns expression with b_i * b^\dagger_j swapped or empty expression if b is the last term in L
         */
-        friend DList contract_deltas(DList &L, bool braketmode);
+        friend DList contract_deltas(DList& L, bool braketmode);
 
         /*! \brief Order only the b's (to the left hand side) and b\dagger's (to the right hand side) terms.
           Applies the following identity:
@@ -488,18 +496,18 @@ namespace sospin {
           @para[in] braketmode, if true if last element in DList is a b, then the L is cleared
           @return returns expression with b^\dagger_j * b_i swapped or empty expression if b is the last term in L
         */
-        friend DList ordering(DList &L, bool braketmode);
+        friend DList ordering(DList& L, bool braketmode);
 
 
         /*! \brief Creates and returns a string with the deltas and constants of a DList.*/
-        friend string printDeltas(DList &L);
+        friend string printDeltas(DList& L);
 
 
         /*! \brief Adds element "j" to the end of DList. Returns pointer to DList.*/
         friend DList& operator*(DList& L, elemType j);
 
         /*! \brief Creates and returns new DList that joins two DLists by order of parameters.*/
-        friend DList operator*(const DList& L, const DList &M);
+        friend DList operator*(const DList& L, const DList& M);
 
         /*! \brief Negates the sign of a DList and add the elemtype "j" at end of it.*/
         friend DList& operator-(DList& L, elemType j);
@@ -508,23 +516,23 @@ namespace sospin {
         friend DList& operator,(DList& L, elemType j);
 
         /*! \brief Sends to output stream ostream a string with the corresponding expression of the DList.*/
-        friend ostream& operator<<(ostream& out, DList &L);
+        friend ostream& operator<<(ostream& out, DList& L);
 
         /*! \brief Sends to output stream ostream a string with the corresponding expression of the DList.*/
-        friend ostream& operator<<(ostream& out, DList *L);
+        friend ostream& operator<<(ostream& out, DList* L);
 
         //same as operator* and operator,
         /*! \brief Adds element "j" to the end of DList. Returns pointer to DList.*/
-        friend DList& operator<<(DList &L, elemType j);
+        friend DList& operator<<(DList& L, elemType j);
 
         /*! \brief Copies DList. Creates and returns a new DList with nodes of both DLists. Sign is the product of both products.*/
-        friend DList& operator<<(DList &L, DList &M);
+        friend DList& operator<<(DList& L, DList& M);
 
         /*! \brief Returns true if two DLists are equal.*/
-        friend bool operator==(DList &L, DList &M);
+        friend bool operator==(DList& L, DList& M);
 
-    };
+        };
 
-}
+    }
 
 #endif

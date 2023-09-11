@@ -2,9 +2,14 @@
 *.iml
 .idea/
 .project
+.cproject
 .DS_Store
-build/
 .settings
+settings.json
+
+# Project specific
+out/
+build/
 
 # Prerequisites
 *.d
