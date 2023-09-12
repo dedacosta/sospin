@@ -21,8 +21,18 @@ This as simplified the installation of the library and  involves the followings 
 3. cmake --install build _(by defaut installs in the *out* directory)_
 4. make -f build/doc/Makefile doxygen-doc (optional, generate SOSpin library documentation)
 
-For convenience, it was created Makefile with the goals: **clean** (removes build files), **install** (performs the cmake commands) and
-**doxygen-doc** or **doc** generate the library documentation. This simplifies the set of the above commands.
+For convenience, it was created Makefile with the goals:
+```make 
+    make clean|buid|install|doxygen-doc|doc|format|info
+```
+- **clean** -- it removes all generated build files and folders 
+- **build** -- it builds the **cmake** project
+- **install** -- it installs the executables, includes and library files in the **out** folder (if no other prefix is set) 
+- **doxygen-doc** or **doc** -- generate the library documentation 
+- **format** -- it reformats the source and header files according to the configuration file _'.clang-format'_ (_clang-format_ must be installed)
+- **info** -- it shows the header and source files being take into account by **cmake**
+
+Without any given command, _make_ will build the workspace by default. This _Makefile_ is only meant to simplify the set of the **cmake** commands shown above.
 
 During the build process, the folder **build** is created with all necessary tools for compilation without polluting the 
 workspace. The installation of the library and in the include files are deployed in the generated folder **out**. This 

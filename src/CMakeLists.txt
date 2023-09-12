@@ -1,12 +1,8 @@
-include_directories(
-  ${PROJECT_SOURCE_DIR}/include
-  ${PROJECT_SOURCE_DIR}/include/sospin
-  ${PROJECT_SOURCE_DIR}/src
-)
-
+# SOURCES
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS *.cpp *.h *.hpp)
 
 add_library(sospin STATIC ${SOURCES})
+target_include_directories(sospin PRIVATE ${PROJECT_SOURCE_DIR}/src PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 install(TARGETS sospin
     LIBRARY DESTINATION lib

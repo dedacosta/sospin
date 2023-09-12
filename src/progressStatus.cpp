@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------------
 // SOSpin Library
-// Copyright (C) 2015 SOSpin Project
+// Copyright (C) 2015,2023 SOSpin Project
 //
 //   Authors:
 //
@@ -26,110 +26,74 @@
 // along with SOSpin Library.  If not, see <http://www.gnu.org/licenses/>.
 // ----------------------------------------------------------------------------
 
-//       progressStatus.cpp created on 27/02/2015 
+//       progressStatus.cpp created on 27/02/2015
 //
-//      This file contains the functions necessary to do things 
-//   in the SOSpin Library.
+//      This file is an integrant part of the SOSpin Library.
 //
 //      Revision 1.1 28/02/2015 23:19:29 david
-//      License updated	
-//
+//      License updated
+//      Revision 1.2 12/09/2023 16:53:51 david
 
 /*!
-  \file 
+  \file
   \brief Specific functions progress status bar.
 */
 
-
+#include <sospin/progressStatus.h>
+#include <sospin/son.h>
 #include <stdio.h>
-
 #include <stdlib.h>
-
-#include "progressStatus.h"
-
-#include "son.h"
-
-
-
-
 
 using namespace std;
 
-
-
-
-
 namespace sospin {
-
-
 
 #define PROGRESS_STATUS_BAR_LENGTH 46
 
+void DoProgress(string label, unsigned int step, unsigned int total, unsigned int interval) {
 
+  if (getVerbosity() == SILENT || total < 1) return;
 
+  if (step % interval != 0 && step < total) return;
 
+  // Calculuate the ratio of complete-to-incomplete.
 
+  float ratio = step / (float)total;
 
+  int c = ratio * PROGRESS_STATUS_BAR_LENGTH;
 
-void DoProgress( string label, unsigned int step, unsigned int total, unsigned int interval ){
+  // Show the percentage completed.
 
-    if(getVerbosity() == SILENT || total < 1) return;
+  printf("%s %3d%% [", label.c_str(), (int)(ratio * 100));
 
-    if ( step % interval != 0 && step < total) return;
+  // Show the loading bar.
 
-     // Calculuate the ratio of complete-to-incomplete.
+  for (int x = 0; x < c; x++) printf("=");
 
-    float ratio = step/(float)total;
+  for (int x = c; x < PROGRESS_STATUS_BAR_LENGTH; x++) printf(" ");
 
-    int   c     = ratio * PROGRESS_STATUS_BAR_LENGTH; 
+  printf("]\n");
 
-    // Show the percentage completed.
+  // ANSI Control codes to go back to the previous line and clear it.
 
-    printf("%s %3d%% [", label.c_str(), (int)(ratio*100) ); 
+  if (getVerbosity() >= VERBOSE) {
 
-    // Show the loading bar.
+    if (step != total)
 
-    for (int x=0; x<c; x++)  printf("="); 
+      printf("\033[F\033[J");
 
-    for (int x=c; x<PROGRESS_STATUS_BAR_LENGTH; x++)  printf(" ");
+  }
 
-    printf("]\n");
+  else {
 
-
-
-    // ANSI Control codes to go back to the previous line and clear it.
-
-    if(getVerbosity() >= VERBOSE){
-
-        if(step != total)
-
-        printf("\033[F\033[J"); 
-
-    }
-
-    else{
-
-        printf("\033[F\033[J");        
-
-    }
-
+    printf("\033[F\033[J");
+  }
 }
 
+void DoProgress(string label, unsigned int step, unsigned int total) {
 
-
-
-
-
-
-
-
-void DoProgress( string label, unsigned int step, unsigned int total ){
-
-    DoProgress(label, step, total, 10);
-
+  DoProgress(label, step, total, 10);
 }
-
-
 
 #ifdef PROGRESS_STATUS_BAR_LENGTH
 
@@ -137,7 +101,4 @@ void DoProgress( string label, unsigned int step, unsigned int total ){
 
 #endif
 
-
-
-}
-
+}  // namespace sospin

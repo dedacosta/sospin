@@ -26,25 +26,59 @@
 # along with SOSpin Library.  If not, see <http:#www.gnu.org/licenses/>.
 # ----------------------------------------------------------------------------
 
-all : 
-	@echo Commands: clean install doc
-	
-.PHONY : clean install doc
+BUILD = build
+OUT = out
+
+CURRENT_DIR = $(shell pwd)
+BUILD := $(CURRENT_DIR)/$(BUILD)
+OUT := $(CURRENT_DIR)/$(OUT)
+BUILT = $(BUILD)/.built
+INSTALLED = $(BUILD)/install_manifest.txt
+
+SOURCES := $(shell find $(CURRENT_DIR)/src -name '*.c[pp]?') $(shell find $(CURRENT_DIR)/app -name '*.c[pp]?')
+HEADERS := $(shell find $(CURRENT_DIR)/include -name '*.h')
+
+all : $(BUILT)
+	@#
+
+# Building and install chain
+$(BUILD) :
+	@cmake -S . -B $(BUILD)
+
+$(BUILT) : $(HEADERS) $(SOURCES) $(BUILD)
+	@cmake --build $(BUILD) && touch $(BUILT)
+
+$(INSTALLED) : $(BUILT)
+	@cmake --install $(BUILD) 
+
+# Commands
+.PHONY : clean build install test doxygen-doc doc format info
 
 clean :
-	@find . -name ".DS_Store" | xargs rm -rf
-	@find . -name ".project" | xargs rm -rf
-	@find . -name ".cproject" | xargs rm -rf
+	@find . -name ".DS_Store" -name ".project"  -name ".cproject" | xargs rm -rf
 	@find . -name "build" | xargs rm -rf
-	@rm -rf .settings out
-	
-install: 
-	@cmake -S . -B build
-	@cmake --build build 
-	@cmake --install build
+	@rm -rf .settings .vscode $(OUT) $(BUILD)
 
-doxygen-doc :
-	@make -f build/doc/Makefile doxygen-doc
+build :
+	@cmake --build $(BUILD) && touch $(BUILT)
+
+install : $(BUILT) 
+	@cmake --install $(BUILD)
+
+test : $(BUILD) $(BUILT)
+	@ctest --test-dir $(BUILD) --output-on-failure
+
+doxygen-doc : $(BUILT)
+	@make -f $(BUILD)/doc/Makefile doxygen-doc
 
 doc : doxygen-doc
 	@#
+
+format : $(SOURCES) $(HEADERS)
+	@for item in $^ ; do clang-format -i $$item; done
+
+info :
+	@echo Headers:
+	@for item in $(HEADERS) ; do echo "    $$item"; done
+	@echo Sources:
+	@for item in $(SOURCES) ; do echo "    $$item"; done

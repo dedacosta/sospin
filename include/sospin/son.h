@@ -6,11 +6,9 @@
  * <br><br><a href="http://sospin.hepforge.org/">Return to the main SOSpin page.</a>
  */
 
-
-
 // ----------------------------------------------------------------------------
 // SOSpin Library
-// Copyright (C) 2015 SOSpin Project
+// Copyright (C) 2015,2023 SOSpin Project
 //
 //   Authors:
 //
@@ -38,12 +36,11 @@
 
 //       son.h created on 27/02/2015
 //
-//      This file contains the functions necessary to do things
-//   in the SOSpin Library.
+//      This file is an integrant part of the SOSpin Library.
 //
 //      Revision 1.1 28/02/2015 23:19:29 david
 //      License updated
-//
+//      Revision 1.2 12/09/2023 16:53:51 david
 
 /*!
   \file
@@ -53,20 +50,18 @@
 #ifndef SON_H
 #define SON_H
 
-
-#include "timer.h"
-#include "index.h"
-#include "dlist.h"
-#include "braket.h"
-#include "form.h"
-#include "enum.h"
+#include <sospin/braket.h>
+#include <sospin/dlist.h>
+#include <sospin/enum.h>
+#include <sospin/form.h>
+#include <sospin/index.h>
+#include <sospin/timer.h>
 
 #if DOXYGEN
 #define nAsserts
 #endif
 
 namespace sospin {
-
 
 /*! \def bb(a)
   \brief C++ Macro for DList b operator
@@ -97,7 +92,7 @@ namespace sospin {
   \param[in] a is the first delta index without quotation marks
   \param[in] b is the second delta index without quotation marks
 */
-#define delta(a,b) DList(2, newIdx(#a), newIdx(#b))
+#define delta(a, b) DList(2, newIdx(#a), newIdx(#b))
 /*! \def identity
   \brief C++ Macro for DList identity/one
 */
@@ -109,29 +104,28 @@ namespace sospin {
   \param a constant part without quotation marks
   \param b DList expression
 */
-#define bra(i,a,b) Braket(i,#a, b, bra)
+#define bra(i, a, b) Braket(i, #a, b, bra)
 /*! \def ket(i,a,b)
   \brief C++ Macro for ket expression
   \param i index sum
   \param a constant part without quotation marks
   \param b DList expression
 */
-#define ket(i,a,b) Braket(i,#a, b, ket)
+#define ket(i, a, b) Braket(i, #a, b, ket)
 /*! \def braket(i,a,b)
   \brief C++ Macro for braket expression
   \param i index sum
   \param a constant part without quotation marks
   \param b DList expression
 */
-#define braket(i,a,b) Braket(i,#a, b, braket)
+#define braket(i, a, b) Braket(i, #a, b, braket)
 /*! \def free(i,a,b)
   \brief C++ Macro for none expression
   \param i index sum
   \param a constant part without quotation marks
   \param b DList expression
 */
-#define free(i,a,b) Braket(i,#a, b, none)
-
+#define free(i, a, b) Braket(i, #a, b, none)
 
 /*! \def Field(a, b, c, d)
   \brief C++ Macro to declare field properties none expression
@@ -141,7 +135,7 @@ namespace sospin {
   \param d field with/without flavor index and symmetric/asymmetric field (SYM, ASYM, SYM_WITH_FLAVOR or ASYM_WITH_FLAVOR)
   \return field name in string format
 */
-#define Field(a, b, c, d)  FormField(#a, b, c, d)
+#define Field(a, b, c, d) FormField(#a, b, c, d)
 
 /*!
   \brief Set the group dimension
@@ -152,18 +146,15 @@ void setDim(int n);
 */
 int getDim();
 
-
 /*!
   \brief Return Group parity
 */
 bool GroupEven();
 
-
 /*!
   \brief Clean all indexes and function declarations
 */
 void CleanGlobalDecl();
-
 
 /*!
   \brief Set verbosity level
@@ -181,37 +172,31 @@ Verbosity getVerbosity();
   \brief Return current ostream verbosity level
   \return ostream for output
 */
-ostream& operator<<(ostream& out,const Verbosity &a);
+ostream& operator<<(ostream& out, const Verbosity& a);
 
-//Braket BopN1();
-Braket Bop(std::string startid="i");
+// Braket BopN1();
+Braket Bop(std::string startid = "i");
 Braket BopIdnum();
 
-//void process_mem_usage(double& vm_usage, double& resident_set); //only works for linux
+// void process_mem_usage(double& vm_usage, double& resident_set); //only works for linux
 
 /*!
   \brief Gets current resident set size (RSS) - physical memory use.
   \return Returns the current resident set size (physical memory use) measured in bytes, or zero if the value cannot be determined on this OS.
 */
-size_t getCurrentRSS( );
-
+size_t getCurrentRSS();
 
 /*!
   \brief Gets highest (peak) value so far for resident set size (RSS) - physical memory use.
   \return Returns the peak (maximum so far) resident set size (physical memory use) measured in bytes, or zero if the value cannot be determined on this OS.
 */
-size_t getPeakRSS( );
-
+size_t getPeakRSS();
 
 /*!
   \brief Prints memory stats (current and peak resident set size) in MB.
 */
 void print_process_mem_usage();
 
-
-}
+}  // namespace sospin
 
 #endif
-
-
-

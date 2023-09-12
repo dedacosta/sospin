@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
+
 include(CheckCCompilerFlag)
 
 project(
@@ -7,19 +8,25 @@ project(
 	DESCRIPTION "A Library to calculate the decomposition of the Yukawa interactions invariants on SO(2N) groups in terms of the SU(N) subgroup"
  	LANGUAGES CXX
 )
-  
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-set(CMAKE_CXX_STANDARD 17)
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
 
+# require C++17
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic -Wno-unused-parameter")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-set(CMAKE_CXX_EXTENSIONS OFF)
+# set CMAKE policy
+cmake_policy(SET CMP0135 NEW)
+
+# enable testing functionality
+enable_testing()
 
 find_package(Doxygen)
 if(Doxygen_FOUND)

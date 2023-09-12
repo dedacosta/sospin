@@ -4,7 +4,7 @@
   "version": "1.1.0",
   "license": "GPL-3",
   "keywords": [
-    "special othogonal groups",
+    "special orthogonal groups",
     "special unitary groups",
     "grand unification",
     "Grassmann operators"
@@ -14,7 +14,7 @@
       "name": "Nuno Cardoso"
     },
     {
-      "name": "David Emmanuel-Costa"
+      "name": "David da Costa"
     },
     {
       "name": "Nuno Gonçalves"

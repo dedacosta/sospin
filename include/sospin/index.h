@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------------
 // SOSpin Library
-// Copyright (C) 2015 SOSpin Project
+// Copyright (C) 2015,2023 SOSpin Project
 //
 //   Authors:
 //
@@ -28,33 +28,29 @@
 
 //       index.h created on 27/02/2015
 //
-//      This file contains the functions necessary to do things
-//   in the SOSpin Library.
+//      This file is an integrant part of the SOSpin Library.
 //
 //      Revision 1.1 28/02/2015 23:19:29 david
-//      Revision 1.1 29/04/2015 17:34:00 nunogon
+//      Revision 1.2 29/04/2015 17:34:00 nunogon
 //      License updated
-//
+//      Revision 1.3 12/09/2023 16:53:51 david
 
 /*!
-  \file 
+  \file
   \brief Functions and cointainer for indices.
 */
 
 #ifndef INDEX_H
 #define INDEX_H
 
-#include <string>
+#include <algorithm>
+#include <cstdlib>
 #include <cstring>
 #include <sstream>
-#include <cstdlib>
-#include <algorithm>
+#include <string>
 #include <vector>
 
-
-
 using namespace std;
-
 
 namespace sospin {
 
@@ -86,9 +82,9 @@ string makeId(string a, int id);
 void printIDX();
 
 /*! \brief Convert to string.*/
-template<class T>
+template <class T>
 string ToString(T number);
 
-}
+}  // namespace sospin
 
 #endif

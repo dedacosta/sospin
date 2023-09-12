@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------------
 // SOSpin Library
-// Copyright (C) 2015 SOSpin Project
+// Copyright (C) 2015,2023 SOSpin Project
 //
 //   Authors:
 //
@@ -26,17 +26,16 @@
 // along with SOSpin Library.  If not, see <http://www.gnu.org/licenses/>.
 // ----------------------------------------------------------------------------
 
-//       progressStatus.h created on 27/02/2015 
+//       progressStatus.h created on 27/02/2015
 //
-//      This file contains the functions necessary to do things 
-//   in the SOSpin Library.
+//      This file is an integrant part of the SOSpin Library.
 //
 //      Revision 1.1 28/02/2015 23:19:29 david
-//      License updated	
-//
+//      License updated
+//      Revision 1.2 12/09/2023 16:53:51 david
 
 /*!
-  \file 
+  \file
   \brief Specific functions progress status bar.
 */
 
@@ -44,39 +43,18 @@
 
 #define PROGRESSSTATUS_H_DEF
 
-
-
-
-
-#include <iostream>
-
-#include <cstring>
-
-#include <sstream>
-
 #include <cstdlib>
-
+#include <cstring>
+#include <iostream>
+#include <sstream>
 #include <string>
-
-
-
-
 
 namespace sospin {
 
+void DoProgress(std::string label, unsigned int step, unsigned int total);
 
+void DoProgress(std::string label, unsigned int step, unsigned int total, unsigned int print_at_steps);
 
-void DoProgress( std::string label, unsigned int step, unsigned int total );
+}  // namespace sospin
 
-
-
-void DoProgress( std::string label, unsigned int step, unsigned int total, unsigned int print_at_steps );
-
-
-
-}
-
-
-
-#endif // PROGRESSSTATUS_H_DEF
-
+#endif  // PROGRESSSTATUS_H_DEF

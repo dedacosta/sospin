@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------------
 // SOSpin Library
-// Copyright (C) 2015 SOSpin Project
+// Copyright (C) 2015,2023 SOSpin Project
 //
 //   Authors:
 //
@@ -26,23 +26,21 @@
 // along with SOSpin Library.  If not, see <http://www.gnu.org/licenses/>.
 // ----------------------------------------------------------------------------
 
-//       enum.h created on 27/02/2015 
+//       enum.h created on 27/02/2015
 //
-//      This file contains the functions necessary to do things 
-//   in the SOSpin Library.
+//      This file is an integrant part of the SOSpin Library.
 //
 //      Revision 1.1 28/02/2015 23:19:29 david
-//      License updated	
-//
+//      License updated
+//      Revision 1.2 12/09/2023 16:53:51 david
 
 /*!
-  \file 
+  \file
   \brief Enumerators.
 */
 
 #ifndef ENUM_H
 #define ENUM_H
- 
 
 /*!
   \enum Enumerator for Braket Type
@@ -55,19 +53,16 @@ typedef enum OPMode_s {
   braket
 } OPMode;
 
-
 /*!
   \enum Enumerator for verbosity
   \brief Enumerator for verbosity
 */
 typedef enum Verbosity_s {
- SILENT,
- SUMMARIZE,
- VERBOSE,
- DEBUG_VERBOSE
+  SILENT,
+  SUMMARIZE,
+  VERBOSE,
+  DEBUG_VERBOSE
 } Verbosity;
-
-
 
 /*!
   \enum Enumerator for FuncProp
@@ -80,8 +75,4 @@ typedef enum FuncProp_s {
   ASYM_WITH_FLAVOR  // antisymmetric with flavor indice
 } FuncProp;
 
-
 #endif
-
-
-
