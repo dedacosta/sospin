@@ -7,7 +7,6 @@ target_include_directories(sospin PRIVATE ${PROJECT_SOURCE_DIR}/src PUBLIC ${PRO
 install(TARGETS sospin
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
-    RUNTIME DESTINATION bin
 )
 
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/ DESTINATION include)

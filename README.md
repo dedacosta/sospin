@@ -1,5 +1,5 @@
 ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdedacosta%2Fsospin-dev%2Fdevelop%2Fpackage.json%3Ftoken%3DGHSAT0AAAAAACHQZAGYSNNKM2FNDMBZRC5IZIBO4YQ&query=version&label=Version&color=blue)
-[![C++](https://img.shields.io/badge/C++-20-blue)](https://en.cppreference.com/w/cpp/20)
+[![C++](https://img.shields.io/badge/C++-17-blue)](https://en.cppreference.com/w/cpp/20)
 [![form](https://img.shields.io/badge/Form-4.3-blue)](https://github.com/vermaseren/form/tree/4.3)
 [![DOI](https://zenodo.org/badge/DOI/10.1016/j.cpc.2016.01.010.svg)](https://doi.org/10.1016/j.cpc.2016.01.010)
 [![DOI](https://img.shields.io/badge/arXiv-1509.00433-red)](https://arxiv.org/abs/1509.00433)
@@ -11,6 +11,8 @@
 The <span class="blue">SO</span><span class="reverse">S</span>pin(one reads it as a single word “sospin”) c++ library 
 has the purpose to calculate the decomposition of the Yukawa interactions invariants on SO(2N) groups in terms
 of the SU(N) subgroup. The program also includes specific functions to address the SO(10).
+
+For the original library see [version 1.0.0](https://github.com/dedacosta/sospin/tree/v1.0.0).
 
 ## Compilation & Installation
 
@@ -28,7 +30,7 @@ For convenience, it was created Makefile with the goals:
 - **clean** -- it removes all generated build files and folders 
 - **build** -- it builds the **cmake** project
 - **install** -- it installs the executables, includes and library files in the **out** folder (if no other prefix is set) 
-- **doxygen-doc** or **doc** -- generate the library documentation 
+- **doxygen-doc** or **doc** -- it generates the library documentation with doxygen
 - **format** -- it reformats the source and header files according to the configuration file _'.clang-format'_ (_clang-format_ must be installed)
 - **info** -- it shows the header and source files being take into account by **cmake**
 
@@ -38,6 +40,11 @@ During the build process, the folder **build** is created with all necessary too
 workspace. The installation of the library and in the include files are deployed in the generated folder **out**. This 
 can be changed by setting the variable _CMAKE_INSTALL_PREFIX_ within the file **CMakeLists.txt** to the desired 
 destination.
+
+The **CMake** build was test on:
+- Linux 64-bits,
+- macOS Ventura,
+- Windows MinGW64.
 
 ## FORM Installation:
 
@@ -87,6 +94,17 @@ and in the code use
 and if using SO(10) specific functions:
 #include <sospin/tools/so10.h>
 
+## Compilation within a Podman container
+
+A **Dockerfile** is included to test the compilation process in a debian 12.1 container. A support script
+at _./scripts/podman-box.sh_ was added to facilitate the container creation. The script has the following
+commands
+- **clean** -- it cleans the podman images and container
+- **start/stop** -- it starts / stops the container
+
+Without parameters the script makes a bash shell connection to the container.
+
+
 ## Using the specific functions or symbols within the constant part of Braket
 
     pure imaginary: i_
@@ -124,6 +142,13 @@ int main(int argc, char ∗argv[ ]) {
 }
 ```
 
+## References
+
+-  N. Cardoso, D. Emmanuel-Costa, N. Gon¸calves, and C. Simoes, “SOSpin, a C++
+  library for Yukawa decomposition in SO(2N) models,” [Comput. Phys. Commun.
+  203 (2016) 178–200](https://doi.org/10.1016/j.cpc.2016.01.010), [arXiv:1509.00433](https://arxiv.org/abs/1509.00433) [hep-ph].
+- Sospin @ [Hepforge website](https://sospin.hepforge.org).
+- Sospin @ [Mendeley data](https://data.mendeley.com/datasets/w8g9349ppv/1)
 ## Bugs and remarks
 
 For reporting bugs, asking questions, giving remarks and suggestions, we welcome you to use the [Issue Tracker](https://github.com/dedacosta/sospin/issues).

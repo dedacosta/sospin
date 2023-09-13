@@ -35,6 +35,7 @@
 //      Revision 1.3 26/05/2015 00:04:00 nunogon
 //      License updated
 //      Revision 1.4 12/09/2023 16:53:51 david
+//      Revision 1.5 13/09/2023 17:33:20 david
 
 /*!
   \file
@@ -99,7 +100,7 @@ struct elemType {
   // id.y - 10 bits
   // Free bits - 8 bits
   // Total - 32 bits
-  unsigned int dataField;
+  unsigned int dataField {0};
 
   elemType() {}
 

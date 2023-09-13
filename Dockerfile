@@ -1,6 +1,6 @@
 # ----------------------------------------------------------------------------
 # SOSpin Library
-# Copyright (C) 2023 SOSpin Project
+# COPYright (C) 2023 SOSpin Project
 #
 #   Authors:
 #
@@ -22,7 +22,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
+# You should have received a COPY of the GNU General Public License
 # along with SOSpin Library.  If not, see <http:#www.gnu.org/licenses/>.
 # ----------------------------------------------------------------------------
 
@@ -31,6 +31,19 @@ FROM debian:12.1-slim
 LABEL maintainer="David da Costa <david.dacosta@dlr.de>"
 
 RUN apt-get update
-RUN apt-get install -y htop cmake
+RUN apt-get install -y htop g++ python3 doxygen vim cmake
 
-ENTRYPOINT ["tail"] CMD ["-f","/dev/null"]
+RUN mkdir -p /data/sospin
+
+COPY CMakeLists.txt /data/sospin
+COPY package.json /data/sospin
+COPY Makefile /data/sospin
+COPY src /data/sospin/src
+COPY include /data/sospin/include
+COPY app /data/sospin/app
+COPY test /data/sospin/test
+COPY doc /data/sospin/doc
+
+WORKDIR /data/sospin
+
+CMD ["sleep", "infinity"]
