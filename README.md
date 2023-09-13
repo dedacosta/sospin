@@ -1,4 +1,4 @@
-![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdedacosta%2Fsospin-dev%2Fdevelop%2Fpackage.json%3Ftoken%3DGHSAT0AAAAAACHJPDDUXSXAVSW5G4SKDDEGZH2LTKQ&query=version&label=Version&color=blue)
+![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdedacosta%2Fsospin-dev%2Fdevelop%2Fpackage.json%3Ftoken%3DGHSAT0AAAAAACHQZAGYSNNKM2FNDMBZRC5IZIBO4YQ&query=version&label=Version&color=blue)
 [![C++](https://img.shields.io/badge/C++-20-blue)](https://en.cppreference.com/w/cpp/20)
 [![form](https://img.shields.io/badge/Form-4.3-blue)](https://github.com/vermaseren/form/tree/4.3)
 [![DOI](https://zenodo.org/badge/DOI/10.1016/j.cpc.2016.01.010.svg)](https://doi.org/10.1016/j.cpc.2016.01.010)
