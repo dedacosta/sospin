@@ -35,8 +35,14 @@ OUT := $(CURRENT_DIR)/$(OUT)
 BUILT = $(BUILD)/.built
 INSTALLED = $(BUILD)/install_manifest.txt
 
-SOURCES := $(shell find $(CURRENT_DIR)/src -name '*.c[pp]?') $(shell find $(CURRENT_DIR)/app -name '*.c[pp]?')
-HEADERS := $(shell find $(CURRENT_DIR)/include -name '*.h')
+OPTION_SOURCES := -name '*.c' -o -name '*.cc' -o -name '*.cxx' -o -name '*.cpp'
+OPTION_HEADERS := -name '*.h' -o -name '*.hxx'
+OPTION_ALL := $(OPTION_SOURCES) -o $(OPTION_HEADERS)
+
+SOURCES := $(shell find $(CURRENT_DIR)/src $(OPTION_SOURCES))
+SOURCES += $(shell find $(CURRENT_DIR)/app $(OPTION_SOURCES))
+HEADERS := $(shell find $(CURRENT_DIR)/include $(OPTION_HEADERS))
+TEST_SOURCES := $(shell find $(CURRENT_DIR)/test $(OPTION_ALL))
 
 all : $(BUILT)
 	@#
@@ -45,7 +51,7 @@ all : $(BUILT)
 $(BUILD) :
 	@cmake -S . -B $(BUILD)
 
-$(BUILT) : $(HEADERS) $(SOURCES) $(BUILD)
+$(BUILT) : $(HEADERS) $(SOURCES) $(TEST_SOURCES) $(BUILD)
 	@cmake --build $(BUILD) && touch $(BUILT)
 
 $(INSTALLED) : $(BUILT)
@@ -82,3 +88,5 @@ info :
 	@for item in $(HEADERS) ; do echo "    $$item"; done
 	@echo Sources:
 	@for item in $(SOURCES) ; do echo "    $$item"; done
+	@echo Test Sources:
+	@for item in $(TEST_SOURCES) ; do echo "    $$item"; done
