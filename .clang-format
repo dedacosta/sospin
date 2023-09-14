@@ -1,0 +1,8 @@
+#Run manually to reformat a file:
+#clang - format - i-- style = file <file>
+Language : Cpp
+BasedOnStyle : Google
+KeepEmptyLinesAtTheStartOfBlocks : true
+MaxEmptyLinesToKeep : 1
+SeparateDefinitionBlocks : Always
+ColumnLimit: 0

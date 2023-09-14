@@ -26,7 +26,7 @@
 // along with SOSpin Library.  If not, see <http://www.gnu.org/licenses/>.
 // ----------------------------------------------------------------------------
 
-//       progressStatus.cpp created on 27/02/2015
+//       progressStatus.h created on 27/02/2015
 //
 //      This file is an integrant part of the SOSpin Library.
 //
@@ -39,66 +39,22 @@
   \brief Specific functions progress status bar.
 */
 
-#include <sospin/progressStatus.h>
-#include <sospin/son.h>
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef PROGRESSSTATUS_H_DEF
 
-using namespace std;
+#define PROGRESSSTATUS_H_DEF
+
+#include <cstdlib>
+#include <cstring>
+#include <iostream>
+#include <sstream>
+#include <string>
 
 namespace sospin {
 
-#define PROGRESS_STATUS_BAR_LENGTH 46
+void DoProgress(std::string label, unsigned int step, unsigned int total);
 
-void DoProgress(string label, unsigned int step, unsigned int total, unsigned int interval) {
-
-  if (getVerbosity() == SILENT || total < 1) return;
-
-  if (step % interval != 0 && step < total) return;
-
-  // Calculuate the ratio of complete-to-incomplete.
-
-  float ratio = step / (float)total;
-
-  int c = ratio * PROGRESS_STATUS_BAR_LENGTH;
-
-  // Show the percentage completed.
-
-  printf("%s %3d%% [", label.c_str(), (int)(ratio * 100));
-
-  // Show the loading bar.
-
-  for (int x = 0; x < c; x++) printf("=");
-
-  for (int x = c; x < PROGRESS_STATUS_BAR_LENGTH; x++) printf(" ");
-
-  printf("]\n");
-
-  // ANSI Control codes to go back to the previous line and clear it.
-
-  if (getVerbosity() >= VERBOSE) {
-
-    if (step != total)
-
-      printf("\033[F\033[J");
-
-  }
-
-  else {
-
-    printf("\033[F\033[J");
-  }
-}
-
-void DoProgress(string label, unsigned int step, unsigned int total) {
-
-  DoProgress(label, step, total, 10);
-}
-
-#ifdef PROGRESS_STATUS_BAR_LENGTH
-
-#undef PROGRESS_STATUS_BAR_LENGTH
-
-#endif
+void DoProgress(std::string label, unsigned int step, unsigned int total, unsigned int print_at_steps);
 
 }  // namespace sospin
+
+#endif  // PROGRESSSTATUS_H_DEF

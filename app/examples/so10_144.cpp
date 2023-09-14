@@ -26,79 +26,49 @@
 // along with SOSpin Library.  If not, see <http://www.gnu.org/licenses/>.
 // ----------------------------------------------------------------------------
 
-//       progressStatus.cpp created on 27/02/2015
+//      sospin.cpp created on 27/02/2015
 //
 //      This file is an integrant part of the SOSpin Library.
 //
-//      Revision 1.1 28/02/2015 23:19:29 david
+//      Revision 1.1 01/07/2015  nuno
 //      License updated
 //      Revision 1.2 12/09/2023 16:53:51 david
 
-/*!
-  \file
-  \brief Specific functions progress status bar.
-*/
-
-#include <sospin/progressStatus.h>
-#include <sospin/son.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <son.h>
+#include <tools/so10.h>
 
 using namespace std;
+using namespace sospin;
 
-namespace sospin {
+int main(int argc, char *argv[]) {
 
-#define PROGRESS_STATUS_BAR_LENGTH 46
-
-void DoProgress(string label, unsigned int step, unsigned int total, unsigned int interval) {
-
-  if (getVerbosity() == SILENT || total < 1) return;
-
-  if (step % interval != 0 && step < total) return;
-
-  // Calculuate the ratio of complete-to-incomplete.
-
-  float ratio = step / (float)total;
-
-  int c = ratio * PROGRESS_STATUS_BAR_LENGTH;
-
-  // Show the percentage completed.
-
-  printf("%s %3d%% [", label.c_str(), (int)(ratio * 100));
-
-  // Show the loading bar.
-
-  for (int x = 0; x < c; x++) printf("=");
-
-  for (int x = c; x < PROGRESS_STATUS_BAR_LENGTH; x++) printf(" ");
-
-  printf("]\n");
-
-  // ANSI Control codes to go back to the previous line and clear it.
-
-  if (getVerbosity() >= VERBOSE) {
-
-    if (step != total)
-
-      printf("\033[F\033[J");
-
-  }
-
-  else {
-
-    printf("\033[F\033[J");
-  }
+  Timer alltime;
+  alltime.start();
+  cout << "################################################################" << endl;
+  setDim(10);
+  setVerbosity(SUMMARIZE);
+  cout << "Verbosity type: " << getVerbosity() << endl;
+  // unsetSimplifyIndexSum();
+  Braket exp, exp0, exp1, exp2;
+  exp0 = psi_144m(bra) * Bop("j");
+  exp1 = GammaH(0) * psi_144p(ket);
+  cout << "################################################################" << endl;
+  exp = exp0 * exp1;
+  if (1)
+    exp.evaluate(false);  // levi-civita
+  else
+    exp.evaluate(true);  // only deltas
+  // unsetFormIndexSum();
+  CallForm(exp, false, true, "i");
+  setFormRenumber();
+  CallForm(exp, false, true, "i");
+  // exp.setON();
+  cout << "Result: \n"
+       << exp << endl;
+  print_process_mem_usage();
+  cout << "################################################################" << endl;
+  cout << "Total time: " << alltime.getElapsedTimeInMicroSec() << " us\t" << alltime.getElapsedTimeInSec() << " s" << endl;
+  cout << "################################################################" << endl;
+  CleanGlobalDecl();
+  exit(0);
 }
-
-void DoProgress(string label, unsigned int step, unsigned int total) {
-
-  DoProgress(label, step, total, 10);
-}
-
-#ifdef PROGRESS_STATUS_BAR_LENGTH
-
-#undef PROGRESS_STATUS_BAR_LENGTH
-
-#endif
-
-}  // namespace sospin
