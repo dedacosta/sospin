@@ -1,5 +1,5 @@
-![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdedacosta%2Fsospin-dev%2Fdevelop%2Fpackage.json%3Ftoken%3DGHSAT0AAAAAACHQZAGYSNNKM2FNDMBZRC5IZIBO4YQ&query=version&label=Version&color=blue)
-[![C++](https://img.shields.io/badge/C++-17-blue)](https://en.cppreference.com/w/cpp/20)
+![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdedacosta%2Fsospin%2Fmain%2Fpackage.json&query=version&label=Version&color=blue)
+[![C++](https://img.shields.io/badge/C++-11-blue)](https://en.cppreference.com/w/cpp/11)
 [![form](https://img.shields.io/badge/Form-4.3-blue)](https://github.com/vermaseren/form/tree/4.3)
 [![DOI](https://zenodo.org/badge/DOI/10.1016/j.cpc.2016.01.010.svg)](https://doi.org/10.1016/j.cpc.2016.01.010)
 [![DOI](https://img.shields.io/badge/arXiv-1509.00433-red)](https://arxiv.org/abs/1509.00433)
@@ -8,11 +8,11 @@
 
 ## Overview
 
-The ${\Large {\color{rgb(0,40,100}\textsf{SO}}\textsf{&#423;pin}}$ (one reads it as a single word “sospin”) c++ library 
+The ${\color{rgb(0,40,100}\textsf{SO}}\textsf{&#423;pin}$ (one reads it as a single word “sospin”) c++ library 
 has the purpose to calculate the decomposition of the Yukawa interactions invariants on SO(2N) groups in terms
 of the SU(N) subgroup. The program also includes specific functions to address the SO(10).
 
-For the original Git repository of the ${\Large {\color{rgb(0,40,100}\textsf{SO}}\textsf{&#423;pin}}$ library see [version 1.0.0](https://github.com/dedacosta/sospin/tree/v1.0.0).
+For the original Git repository of the ${\color{rgb(0,40,100}\textsf{SO}}\textsf{&#423;pin}$ library see [version 1.0.0](https://github.com/dedacosta/sospin/tree/v1.0.0).
 
 ## Compilation & Installation
 
