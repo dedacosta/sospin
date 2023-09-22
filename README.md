@@ -4,7 +4,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.1016/j.cpc.2016.01.010.svg)](https://doi.org/10.1016/j.cpc.2016.01.010)
 [![DOI](https://img.shields.io/badge/arXiv-1509.00433-red)](https://arxiv.org/abs/1509.00433)
 
-# ${\Large {\color{rgb(0,40,100}\textsf{SO}}\textsf{&#423;pin}}$ C++ Library
+# ${\Large {\color{rgb(0,40,100}\textsf{SO}}\textsf{&#423;pin}}}$ C++ Library
 
 ## Overview
 
