@@ -81,7 +81,7 @@ doc : doxygen-doc
 	@#
 
 format : $(SOURCES) $(HEADERS)
-	@for item in $^ ; do clang-format -i $$item; done
+	@git clang-format
 
 info :
 	@echo Headers:

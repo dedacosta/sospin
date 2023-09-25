@@ -3,25 +3,28 @@
 [![form](https://img.shields.io/badge/Form-4.3-blue)](https://github.com/vermaseren/form/tree/4.3)
 [![DOI](https://zenodo.org/badge/DOI/10.1016/j.cpc.2016.01.010.svg)](https://doi.org/10.1016/j.cpc.2016.01.010)
 [![DOI](https://img.shields.io/badge/arXiv-1509.00433-red)](https://arxiv.org/abs/1509.00433)
+<br/> <br/>
 
-# ${\Large {\color{rgb(0,40,100}\textsf{SO}}\textsf{&#423;pin}}$ C++ Library
+<img src="sospin.svg">
+
+#  A C++ Library Project
 
 ## Overview
 
-The ${\color{rgb(0,40,100}\textsf{SO}}\textsf{&#423;pin}$ (one reads it as a single word “sospin”) c++ library 
+The ${\color{rgb(0,40,100)}\textsf{SO}}\textsf{&#423;pin}$ (one reads it as a single word “sospin”) c++ library 
 has the purpose to calculate the decomposition of the Yukawa interactions invariants on SO(2N) groups in terms
 of the SU(N) subgroup. The program also includes specific functions to address the SO(10).
 
-For the original Git repository of the ${\color{rgb(0,40,100}\textsf{SO}}\textsf{&#423;pin}$ library see [version 1.0.0](https://github.com/dedacosta/sospin/tree/v1.0.0).
+For the original Git repository of the ${\color{rgb(0,40,100)}\textsf{SO}}\textsf{&#423;pin}$ library see [version 1.0.0](https://github.com/dedacosta/sospin/tree/v1.0.0).
 
 ## Compilation & Installation
 
-The ${\color{rgb(0,40,100}\textsf{SO}}\textsf{&#423;pin}$ library was converted into a *CMake* project.
+The ${\color{rgb(0,40,100)}\textsf{SO}}\textsf{&#423;pin}$ library was converted into a *CMake* project.
 This as simplified the installation of the library and  involves the followings commands 
 1. cmake -S . -B build _(prepare the build)_
 2. cmake --build build _(build the library and executables)_
 3. cmake --install build _(by defaut installs in the *out* directory)_
-4. make -f build/doc/Makefile doxygen-doc (optional, generate SOSpin library documentation)
+4. make -f build/doc/Makefile doxygen-doc (optional, generate ${\color{rgb(0,40,100)}\textsf{SO}}\textsf{&#423;pin}$ library documentation)
 
 For convenience, it was created Makefile with the goals:
 ```make 
@@ -31,10 +34,17 @@ For convenience, it was created Makefile with the goals:
 - **build** -- it builds the **cmake** project
 - **install** -- it installs the executables, includes and library files in the **out** folder (if no other prefix is set) 
 - **doxygen-doc** or **doc** -- it generates the library documentation with doxygen
-- **format** -- it reformats the source and header files according to the configuration file _'.clang-format'_ (_clang-format_ must be installed)
+- **format** -- it reformats the source and header files according to the configuration file _'.clang-format'_ 
 - **info** -- it shows the header and source files being take into account by **cmake**
 
-Without any given command, _make_ will build the workspace by default. This _Makefile_ is only meant to simplify the set of the **cmake** commands shown above.
+Without any given command, _make_ will build the workspace by default. This _Makefile_ is only meant to simplify the set
+of the **cmake** commands shown above.
+
+The code style follows the Google Style Guides (https://google.github.io/styleguide) and our extensions are encoded in 
+_'.clang-format'_. The extended styling can be applied using git command:
+```git 
+     git clang-format
+```
 
 During the build process, the folder **build** is created with all necessary tools for compilation without polluting the 
 workspace. The installation of the library and in the include files are deployed in the generated folder **out**. This 
@@ -44,7 +54,8 @@ destination.
 The **CMake** build was test on:
 - Linux 64-bits,
 - macOS Ventura,
-- Windows MinGW64.
+- Windows Visual Studio 17 2022,
+- Windows MinGW64
 
 ## FORM Installation:
 
@@ -79,7 +90,7 @@ with root privileges.
 
 Using the Library:
 There are several code examples in the examples folder which come with the 
-SOSpin library.
+${\color{rgb(0,40,100)}\textsf{SO}}\textsf{&#423;pin}$ library.
 
 
 Linking code with the library in Linux:
@@ -144,11 +155,11 @@ int main(int argc, char ∗argv[ ]) {
 
 ## References
 
--  N. Cardoso, D. Emmanuel-Costa, N. Gon¸calves, and C. Simoes, “SOSpin, a C++
+-  N. Cardoso, D. Emmanuel-Costa, N. Gonçalves, and C. Simões, “SO&#423;pin, a C++
   library for Yukawa decomposition in SO(2N) models,” [Comput. Phys. Commun.
   203 (2016) 178–200](https://doi.org/10.1016/j.cpc.2016.01.010), [arXiv:1509.00433](https://arxiv.org/abs/1509.00433) [hep-ph].
-- Sospin @ [Hepforge website](https://sospin.hepforge.org).
-- Sospin @ [Mendeley data](https://data.mendeley.com/datasets/w8g9349ppv/1)
+- ${\color{rgb(0,40,100)}\textsf{SO}}\textsf{&#423;pin}$ @ [Hepforge website](https://sospin.hepforge.org).
+- ${\color{rgb(0,40,100)}\textsf{SO}}\textsf{&#423;pin}$ @ [Mendeley data](https://data.mendeley.com/datasets/w8g9349ppv/1)
 ## Bugs and remarks
 
 For reporting bugs, asking questions, giving remarks and suggestions, we welcome you to use the [Issue Tracker](https://github.com/dedacosta/sospin/issues).
